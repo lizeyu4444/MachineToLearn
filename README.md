@@ -72,8 +72,36 @@ namely MSE vs. MAE.
 
 
 
+## Natural Language Processing
 
+### NER
 
+从文本中识别出命名性指称项，为关系抽取、知识图谱等任务做铺垫。
+
+![](assets/ner-example.png)
+
+**基于规则的方法**：
+
+利用手工编写的规则对文本进行匹配。需要谨慎处理规则之间的冲突，以及维护成本过大。
+
+**基于特征模版的方法**：
+
+将NER看作是序列标注任务，利用大规模预料来学习出标注模型，从而对句子的各个位置进行标注。常用的模型包括生成式模型HMM、判别式模型CRF等。比较流行的方法是**特征模版 + CRF**的方案。
+
+**基于深度学习+crf**：
+> John  lives in New   York  and works for the European Union
+> B-PER O     O  B-LOC I-LOC O   O     O   O   B-ORG    I-ORG
+
+解释：
+`
+LOC: Location
+PER: Person
+ORG: Organization
+MISC: Miscellaneous
+etc
+B-...: 代表着一个实体的开头
+I-...: 代表一个实体的内部
+`
 
 
 
