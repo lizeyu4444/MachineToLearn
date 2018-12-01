@@ -87,14 +87,16 @@ namely MSE vs. MAE.
 将NER看作是序列标注任务，利用大规模预料来学习出标注模型，从而对句子的各个位置进行标注。常用的模型包括生成式模型HMM、判别式模型CRF等。比较流行的方法是**特征模版 + CRF**的方案。
 
 **基于深度学习+crf的方法**：
-> John  lives in New   York  and works for the European Union
 
-> B-PER O     O  B-LOC I-LOC O   O     O   O   B-ORG    I-ORG
+```
+John  lives in New   York  and works for the European Union
+B-PER O     O  B-LOC I-LOC O   O     O   O   B-ORG    I-ORG
+```
 
 其中，LOC, PER, ORG and MISC分别代表locations, persons, orgnizations and miscellaneous。B-...代表着一个实体的Beginning，I-...代表一个实体的inside。
 
-
 模型是如何得知每个单词的意思？需要有一个.txt类似文件保存如下的信息。
+
 ```
 EU B-ORG
 rejects O
@@ -110,8 +112,15 @@ Peter B-PER
 Blackburn I-PER
 ```
 
+现在NLP的大量任务都采用RNN结构，获取上下文的token之间的联系。一般来说，需要考虑如下几个步骤。
+* **Word Representation**: 使用一个多维的dense vector来表达单词的含义，而不是one-hot，也不是ngram。可以使用Word2Vec或者FastText来训练词向量模型。这里词向量由两部分组成，词向量工具训练出来的vector跟包含character级别的vector。后者可以是hand-crafted features，例如有0、1组成的component，代表单词是否有大写字母开头，也可以是神经网络训练出来的vector，例如Bi-LSTM。vector=concatenate(word-level, char-level)。
+* **Contextual Word Reresentation**: 为了获取一个句子或者文本更强的信息表达，需要使用LSTM或者GRU等结构。
+* **Docoding**: 经过LSTM之后，每个step的输出作为token的表达。每个step的output再接一个fully connected layer, 维度为所有NER的种类。为了输出每一个NER类别的概率，有两种方式。
+	- Softmax
+	- Linear-chain CRF: 给定`w1, ..., wn`的token序列，`s1, ..., sn`的score vector，以及预测目标NER序列`y1, ..., yn`，CRF对每个序列计算一个分数`C`。
+	其中`T`是状态转移矩阵，这里的状态是PER, ORG等，假设共有9种，T是一个9x9的矩阵。`e, b`是9维的代价vector，表示某个状态作为一个tag序列开头或结束的惩罚，即每种状态在开始或者结束时的概率不一样，一般是0或者1。
 
-
+![](assets/ner-output.jpg)
 
 
 
