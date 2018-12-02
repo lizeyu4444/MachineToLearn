@@ -95,7 +95,7 @@ B-PER O     O  B-LOC I-LOC O   O     O   O   B-ORG    I-ORG
 
 其中，LOC, PER, ORG and MISC分别代表locations, persons, orgnizations and miscellaneous。B-...代表着一个实体的Beginning，I-...代表一个实体的inside。
 
-**模型是如何得知每个单词的意思？**需要有一个.txt类似文件保存如下的信息，然后将预料转化为对应的tag序列。
+**模型是如何得知每个单词的意思？** 需要有一个.txt类似文件保存如下的信息，然后将语料转化为对应的tag序列。
 
 ```
 EU B-ORG

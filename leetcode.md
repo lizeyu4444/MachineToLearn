@@ -57,14 +57,14 @@ void BS(vector<int> nums) {
 * **模版**：
 ```
 void LinkedList(node* head) {
-	node* dummy = new node(0);
-	node->next = head;
+    node* dummy = new node(0);
+    node->next = head;
 
-	node* prev = dummy;
-	node* cur = head;
-	while (head != NULL) {
-		// to do
-	}
+    node* prev = dummy;
+    node* cur = head;
+    while (head != NULL) {
+        // to do
+    }
 }
 ```
 
@@ -86,14 +86,14 @@ void LinkedList(node* head) {
 * **BFS模版**：
 ```
 void BFS(int v) {
-	visited[v] = true
-	queue.push(v);
-	while (!queue.empty())
-		w = queue.pop();
-		for (v的每一个邻接点w)
-			if (!visited[w])
-				visited[w] = true
-				queue.pish(w)
+    visited[v] = true
+    queue.push(v);
+    while (!queue.empty())
+        w = queue.pop();
+        for (v的每一个邻接点w)
+            if (!visited[w])
+                visited[w] = true
+                queue.pish(w)
 }
 ```
 
@@ -111,12 +111,12 @@ void BFS(int v) {
 * **DFS模版**：
 ```
 void DFS(int v) {
-	if (边界条件)
-		return;
-	visited[v] = true;
-	for (v的每一个邻接点w) 
-		if (!visited[w])
-			DFS(w)
+    if (边界条件)
+        return;
+    visited[v] = true;
+    for (v的每一个邻接点w) 
+        if (!visited[w])
+            DFS(w)
 }
 ```
 
@@ -134,11 +134,11 @@ void DFS(int v) {
 * **模版**：
 ```
 int recursive(int x, int y) {
-	if (边界条件) 
-		return;
-	int a = recursive(x1, y1);
-	int b = recursive(x2, y2);
-	return a + b;
+    if (边界条件) 
+        return;
+    int a = recursive(x1, y1);
+    int b = recursive(x2, y2);
+    return a + b;
 }
 ```
 
@@ -149,16 +149,15 @@ int recursive(int x, int y) {
     - Partition类
 
 其中，Two sum类包含以下题型：
-2 Sum
-2 Sum ii
-3 Sum
-3 Sum Closest
-4 Sum
-k Sum
-Triangle Count
-Trapping Rain Water
-Container With Most Water
-
+    - 2 Sum
+    - 2 Sum ii
+    - 3 Sum
+    - 3 Sum Closest
+    - 4 Sum
+    - k Sum
+    - Triangle Count
+    - Trapping Rain Water
+    - Container With Most Water
 * **前向型指针**
     - 窗口类
     - 快慢类
@@ -169,20 +168,22 @@ Container With Most Water
 
 
 
-/*
-    Sort
+
+### Sort
+
 快排和归并排序一定要熟悉
-区别：
-	1. 思路：快排是先整体有序，再局部有序；归并是先局部有序，再整体有序
-	2. 稳定性：快排不稳定；归并稳定排序
-	3. 时间复杂度：快排平均O(nlogn)，最坏是O(n^2)，归并最好最坏都是O(nlogn)
-	  空间复杂度：快排是O(1)，归并是数组是O(n)，链表是O(1)
-todo:
-	1. 数组第k大的数
-	2. 链表的归并排序
+
+* 区别：
+    1. 思路：快排是先整体有序，再局部有序；归并是先局部有序，再整体有序
+    2. 稳定性：快排不稳定；归并稳定排序
+    3. 时间复杂度：快排平均O(nlogn)，最坏是O(n^2)，归并最好最坏都是O(nlogn)
+      空间复杂度：快排是O(1)，归并是数组是O(n)，链表是O(1)
+常见题型：
+    1. 数组第k大的数
+    2. 链表的归并排序
 
 
-*/
+
 // 通用交换函数
 void swap(int &a, int &b)
 {
