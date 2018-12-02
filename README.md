@@ -120,11 +120,11 @@ Blackburn I-PER
 	- Linear-chain CRF: 使用Softmax虽然考虑了远处token的联系，但是这种关系并不是很强，make local choices，而CRF在预测tag的时候，考虑了上下文的信息，更加准确。给定`w1, ..., wn`的token序列，`s1, ..., sn`的score vector，以及预测目标tag序列`y1, ..., yn`，CRF对每个序列计算一个分数`C`。
 	其中`T`是状态转移矩阵，这里的状态是PER, ORG等，假设共有9种，T是一个9x9的矩阵。`e, b`是9维的代价vector，表示某个状态作为一个tag序列开头或结束的惩罚，即每种状态在开始或者结束时的概率不一样，一般是0或者1。
 
-![](assets/ner-output.png)
+![](assets/crf-output.png)
 
 **如何寻找最佳的序列？** 如果暴力搜索的话，时间复杂度是`9^n`，n为序列长度。本质上这个是一个马尔科夫链，下一个状态仅与上一个状态有关。因为可以使用动态规划来解决此问题。下面是从后面往前预测，已知`yt+1, .., yn`的最佳概率，预测`yt`的概率。时间复杂度为`9x9*n`。
 
-![](assets/ner-dp.png)
+![](assets/crf-dp.png)
 
 **如何寻找概率最大的序列？** Linear chain CRF的最后一步是对所有可能的sequence施加一个softmax，归一化。
 

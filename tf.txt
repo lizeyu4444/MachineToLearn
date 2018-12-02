@@ -1,0 +1,56 @@
+Good Practices:
+1. Eager execution
+tf.enable_eager_execution() 
+说明：
+    用于debugging，允许建立动态图
+    需要放在代码的开头
+    如果在以前的话需要启动一个session，并初始化才能打印节点的值
+
+2. tf.data
+2.1 From np.array
+x_np = np.ones((10, 5))
+dataset = tf.data.Dataset.from_tensor_slices(x_np)
+for el in dataset:
+  print el  # el是一个x_np的一行，为tf.Tensor，可以用于代替tf.placeholder
+
+2.2 From text file
+dataset = tf.data.TextLineDataset([path_to_file])
+
+2.3 From generator
+dataset = (tf.data.Dataset.from_generator(
+           generator_fn,
+           output_types=(tf.string),
+           output_shapes=()))
+
+2.4 数据转换
+打乱
+dataset = dataset.shuffle(buffer_size=10)
+不是所有的数据可以一次性导入内存，因而设置buffer大小
+
+重复
+dataset = dataset.repeat(2) 
+生成多个epoch
+
+映射
+dataset = dataset.map(
+          lambda t: tf.string_split([t], delimiter=‘ ’).values,
+          num_parallel_calls=4)
+num_parallel_calls：指定线程数
+
+Batch
+dataset = dataset.batch(batch_size=3)
+生成多个batch
+
+Padded batch
+dataset = dataset.padded_batch(
+           batch_size=2, 
+           padded_shapes=([None]), 
+           padding_values=(4))
+
+3. tf.estimator
+不能使用eager execution
+推荐使用，训练流程简单，使用tf serving也很方便
+
+
+
+
