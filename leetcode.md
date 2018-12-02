@@ -147,8 +147,7 @@ int recursive(int x, int y) {
 * **对撞型指针**
     - Two sum类
     - Partition类
-
-    * 常见题型：
+    - 常见题型：
         1. 2 Sum
         2. 2 Sum ii
         3. 3 Sum
@@ -158,7 +157,7 @@ int recursive(int x, int y) {
         7. Triangle Count
         8. Trapping Rain Water
         9. Container With Most Water
-        
+
 * **前向型指针**
     - 窗口类
     - 快慢类
@@ -170,29 +169,35 @@ int recursive(int x, int y) {
 
 
 
-### Sort
+### 排序
 
-快排和归并排序一定要熟悉
+* **快排和归并排序区别**：
 
 * 区别：
-    1. 思路：快排是先整体有序，再局部有序；归并是先局部有序，再整体有序
-    2. 稳定性：快排不稳定；归并稳定排序
-    3. 时间复杂度：快排平均O(nlogn)，最坏是O(n^2)，归并最好最坏都是O(nlogn)
+    - 思路：快排是先整体有序，再局部有序；归并是先局部有序，再整体有序
+    - 稳定性：快排不稳定；归并稳定排序
+    - 时间复杂度：快排平均O(nlogn)，最坏是O(n^2)，归并最好最坏都是O(nlogn)
       空间复杂度：快排是O(1)，归并是数组是O(n)，链表是O(1)
-常见题型：
-    1. 数组第k大的数
-    2. 链表的归并排序
+* 常见题型：
+    - 数组第k大的数
+    - 链表的归并排序
 
 
-
-// 通用交换函数
+通用交换函数：
+```
 void swap(int &a, int &b)
 {
     int tmp = a;
     a = b;
     b = tmp;
 }
-// 插入排序，第i个数前面序列已经排好序，将第i个数插入前面合适的位置
+```
+
+* **插入排序**
+
+第i个数前面序列已经排好序，将第i个数插入前面合适的位置
+
+```
 void insertSort(int a[], int n)
 {
     for (int i = 1; i < n; i++)   // for i = 1:n-1
@@ -205,9 +210,12 @@ void insertSort(int a[], int n)
         }
     }
 }
+```
 
-// 交换排序(冒泡排序、快速快序)
-// 1. 冒泡排序
+* **交换排序**(冒泡排序、快速快序)
+
+冒泡排序：
+```
 void bubbleSort(int a[], int n)
 {
     for (int i = 0; i < n-1; i++)    // for i = 0:n-2
@@ -218,7 +226,10 @@ void bubbleSort(int a[], int n)
         }
     }
 }
-// 2. 快速排序
+```
+
+快速排序：
+```
 void quickSort(int a[], int left, int right)
 {
     if (left < right)
@@ -245,8 +256,11 @@ int partition(int a[], int left, int right)
     }
     return i;
 }
+```
 
-// 归并排序
+## 归并排序
+
+```
 L[right];    // 定义辅助存储空间，大小正比于元素个数
 R[right];
 void mergeSort(int a[], int left, int right)
@@ -281,11 +295,14 @@ void merge(int a[], int left, int middle, int right)
             a[k] = R[j++];
     }
 }
+```
 
-/*
-    Binary tree traversal
-*/
-// BFS, 即平常所说的层次遍历
+### 遍历
+
+* **Binary tree traversal**
+
+BFS, 即平常所说的层次遍历
+```
 vector<int> breadthFirstSearch(Node* root)
 {
     vector<int> result;
@@ -304,8 +321,10 @@ vector<int> breadthFirstSearch(Node* root)
     }
     return result;
 }
+```
 
-// ZigZag traversal
+ZigZag traversal
+```
 vector<vector<int> > zigzagLevelOrder(Node* root)
 {
     vector<vector<int> result;   // 结果vector
@@ -345,16 +364,17 @@ vector<vector<int> > zigzagLevelOrder(Node* root)
     }
     return result;
 }
+```
 
+* **DFS**
 
-"""DFS，包括前序、中序、后序遍历
-1. 先序：考察到一个节点后，即刻输出该节点的值，并继续遍历其左右子树。(根左右)
+包括前序、中序、后序遍历
+    - 先序：考察到一个节点后，即刻输出该节点的值，并继续遍历其左右子树。(根左右)
+    - 中序：考察到一个节点后，将其暂存，遍历完左子树后，再输出该节点的值，然后遍历右子树。(左根右)
+    - 后序：考察到一个节点后，将其暂存，遍历完左右子树后，再输出该节点的值。(左右根)
 
-2. 中序：考察到一个节点后，将其暂存，遍历完左子树后，再输出该节点的值，然后遍历右子树。(左根右)
-
-3. 后序：考察到一个节点后，将其暂存，遍历完左右子树后，再输出该节点的值。(左右根)
-"""
-// 前序(递归)，其他递归遍历都类似，交换一下保存顺序即可
+前序(递归)，其他递归遍历都类似，交换一下保存顺序即可
+```
 vector<int> result；
 void preOrderTraversal(Node* root)
 {
@@ -365,8 +385,10 @@ void preOrderTraversal(Node* root)
         preOrderTraversal(result->right);
     }
 }
+```
 
-// 前序(非递归)，跟广度有个算法对应
+前序(非递归)，跟广度有个算法对应
+```
 vector<int> preOrderTraversal(Node* root)
 {
     vector<int> result;
@@ -407,8 +429,10 @@ public void preOrderTraverse2(TreeNode root) {
         }
     }
 }
+```
 
-// 中序(递归)
+中序(递归)
+```
 void inOrderTraversal(Node* root)
 {
     if (root)
@@ -418,15 +442,10 @@ void inOrderTraversal(Node* root)
         InOrderTraversal(node->right);
     }
 }
-// 中序(非递归)
-vector<int> inOrderTraversal(Node* root)
-{
-    vector<int> result;
-    stack<Node*> nodeStack;
+```
 
-    
-}
-// 非递归中序遍历，跟前序很类似
+非递归中序遍历，跟前序很类似
+```
 public static void middleorderTraversal(TreeNode root) {
     Stack<TreeNode> treeNodeStack = new Stack<TreeNode>();
     TreeNode node = root;
@@ -442,8 +461,10 @@ public static void middleorderTraversal(TreeNode root) {
         }
     }
 }
+```
 
-// 后序(递归)
+后序(递归)
+```
 void postOrderTraversal(Node* node)
 {
     if (root)
@@ -453,7 +474,9 @@ void postOrderTraversal(Node* node)
         result.push_back(node->data);
     }
 }
-// 非递归后序遍历
+```
+非递归后序遍历
+```
 public static void postorderTraversal(TreeNode root) {
     Stack<TreeNode> treeNodeStack = new Stack<TreeNode>();
     TreeNode node = root;
@@ -480,12 +503,12 @@ public static void postorderTraversal(TreeNode root) {
         }
     }
 }
+```
 
+### dynamic programming
 
-/*
-    dynamic programming
-*/
-// minimal total in triangle
+* **minimal total in triangle**
+```
 int minimalTotal(vector<vector<int>> &triangle)
 {
     for (int i = triangle.size() - 2; i >= 0; --i)
@@ -497,8 +520,11 @@ int minimalTotal(vector<vector<int>> &triangle)
     }
     return triangle[0][0];
 }
+```
 
-// maximum subarray，最大连续子序列和
+* **maximum subarray**
+最大连续子序列和
+```
 int maxSubArray(int A[], int n)
 {
     int result = INT_MIN;
@@ -511,9 +537,13 @@ int maxSubArray(int A[], int n)
     }
     return result;
 }
+```
 
-// best time to buy and sell stock，决定最佳购买股票时机
-// 1. 只能购买和出售一次，相当于寻找最大递增子串
+* **best time to buy and sell stock**
+决定最佳购买股票时机
+
+只能购买和出售一次，相当于寻找最大递增子串
+```
 int maxProfit(vector<int> &prices)
 {
     if (prices.size() < 2) return 0;
@@ -527,7 +557,10 @@ int maxProfit(vector<int> &prices)
     }
     return profit;
 }
-// 2. 可以多次购买，即把所有为正的差价加起来
+```
+
+可以多次购买，即把所有为正的差价加起来
+```
 int maxProfit(vector<int> &prices)
 {
     int profit = 0;
@@ -537,11 +570,14 @@ int maxProfit(vector<int> &prices)
     }
     return profit;
 }
+```
 
 
+## 数据结构实现
 
-//  堆实现
+### 堆实现
 
+```
 class MinHeap {
 private:
     int capacity;
@@ -624,11 +660,5 @@ public:
 
     }
 };
-
-
-
-
-
-
-
+```
 
