@@ -367,11 +367,11 @@ vector<vector<int> > zigzagLevelOrder(Node* root)
 ```
 
 * **DFS**
-
 包括前序、中序、后序遍历
-    - 先序：考察到一个节点后，即刻输出该节点的值，并继续遍历其左右子树。(根左右)
-    - 中序：考察到一个节点后，将其暂存，遍历完左子树后，再输出该节点的值，然后遍历右子树。(左根右)
-    - 后序：考察到一个节点后，将其暂存，遍历完左右子树后，再输出该节点的值。(左右根)
+
+    1. 先序：考察到一个节点后，即刻输出该节点的值，并继续遍历其左右子树。(根左右)
+    2. 中序：考察到一个节点后，将其暂存，遍历完左子树后，再输出该节点的值，然后遍历右子树。(左根右)
+    3. 后序：考察到一个节点后，将其暂存，遍历完左右子树后，再输出该节点的值。(左右根)
 
 前序(递归)，其他递归遍历都类似，交换一下保存顺序即可
 ```
@@ -475,6 +475,7 @@ void postOrderTraversal(Node* node)
     }
 }
 ```
+
 非递归后序遍历
 ```
 public static void postorderTraversal(TreeNode root) {
@@ -523,6 +524,7 @@ int minimalTotal(vector<vector<int>> &triangle)
 ```
 
 * **maximum subarray**
+
 最大连续子序列和
 ```
 int maxSubArray(int A[], int n)
@@ -540,6 +542,7 @@ int maxSubArray(int A[], int n)
 ```
 
 * **best time to buy and sell stock**
+
 决定最佳购买股票时机
 
 只能购买和出售一次，相当于寻找最大递增子串
@@ -606,8 +609,6 @@ public:
             swap(&array[smallest], &array[i]);
             MinHeapify(smallest);
         }
-
-
     }
 
     int parent(int i) {return (i-1)/2};
