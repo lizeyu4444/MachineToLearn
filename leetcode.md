@@ -147,16 +147,17 @@ int recursive(int x, int y) {
 * **对撞型指针**
     - Two sum类
     - Partition类
-    - 常见题型：
-        1. 2 Sum
-        2. 2 Sum ii
-        3. 3 Sum
-        4. 3 Sum Closest
-        5. 4 Sum
-        6. k Sum
-        7. Triangle Count
-        8. Trapping Rain Water
-        9. Container With Most Water
+
+常见题型：
+1. 2 Sum
+2. 2 Sum ii
+3. 3 Sum
+4. 3 Sum Closest
+5. 4 Sum
+6. k Sum
+7. Triangle Count
+8. Trapping Rain Water
+9. Container With Most Water
 
 * **前向型指针**
     - 窗口类
@@ -258,8 +259,7 @@ int partition(int a[], int left, int right)
 }
 ```
 
-## 归并排序
-
+归并排序：
 ```
 L[right];    // 定义辅助存储空间，大小正比于元素个数
 R[right];
