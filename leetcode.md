@@ -150,15 +150,23 @@ int recursive(int x, int y) {
 
 常见题型：
 
-1. 2 Sum
-2. 2 Sum ii
-3. 3 Sum
-4. 3 Sum Closest
-5. 4 Sum
-6. k Sum
-7. Triangle Count
-8. Trapping Rain Water
-9. Container With Most Water
+2 Sum
+
+2 Sum ii
+
+3 Sum
+
+3 Sum Closest
+
+4 Sum
+
+k Sum
+
+Triangle Count
+
+Trapping Rain Water
+
+Container With Most Water
 
 * **前向型指针**
     - 窗口类
