@@ -6,13 +6,13 @@
 ### 二分法
 
 * **说明**：
-    1. start+1 < end: 相邻即退出循环，永远不会死循环
-    2. mid = start + (end - start)/2 防止整数溢出
-    3. 简化条件判断，都是mid，可以不用考虑mid+1或者mid-1，当然考虑也是可以的
-    4. 最后只需要判断start、end两个位置的参数，顺序也可以相反
+    - start+1 < end: 相邻即退出循环，永远不会死循环
+    - mid = start + (end - start)/2 防止整数溢出
+    - 简化条件判断，都是mid，可以不用考虑mid+1或者mid-1，当然考虑也是可以的
+    - 最后只需要判断start、end两个位置的参数，顺序也可以相反
 * **使用**：
-    1. 数组、字符串寻找起点终点等
-    2. 当前复杂度为O(n)，但是需要复杂度O(logn)
+    - 数组、字符串寻找起点终点等
+    - 当前复杂度为O(n)，但是需要复杂度O(logn)
 * **模版**：
 
 ```
@@ -44,15 +44,15 @@ void BS(vector<int> nums) {
 ### 链表
 
 * **说明**：
-    1. 使用dummy节点，即哑节点或者向导节点，只要返回的头节点发生了变化，
+    - 使用dummy节点，即哑节点或者向导节点，只要返回的头节点发生了变化，
       一般都要用这个dummy node
-    2. 经常使用prev和cur两个节点来共同操作链表
-    3. 链表最大的特点是灵活，不用耗费额外空间，所以很多方法都可以达到空间复杂度要求
+    - 经常使用prev和cur两个节点来共同操作链表
+    - 链表最大的特点是灵活，不用耗费额外空间，所以很多方法都可以达到空间复杂度要求
 * **使用**：
-    1. 链表的插入、删除要熟悉
-    2. 经常使用的技巧是快慢指针
+    - 链表的插入、删除要熟悉
+    - 经常使用的技巧是快慢指针
 * **常见题型**：
-    1. merge k linked list，三种方法都要会（优先级队列、分治、两两合并）
+    - merge k linked list，三种方法都要会（优先级队列、分治、两两合并）
 
 * **模版**：
 ```
@@ -71,15 +71,13 @@ void LinkedList(node* head) {
 ### 数组和数字
 
 * **常见题型**：
-    1. 排序数组
+    - 排序数组
       融合两个排序数组、排序数组的交集、两个数组的点积
       两个有序数组的中点
-    2. 子数组
+    - 子数组
       购买股票
       子数组subarray
-    3. [双指针](#双指针)
-
-
+    - [双指针](#双指针)
 
 ### BFS和DFS
 
@@ -148,36 +146,20 @@ int recursive(int x, int y) {
     - Two sum类
     - Partition类
 
-常见题型：
-
-2 Sum
-
-2 Sum ii
-
-3 Sum
-
-3 Sum Closest
-
-4 Sum
-
-k Sum
-
-Triangle Count
-
-Trapping Rain Water
-
-Container With Most Water
-
 * **前向型指针**
     - 窗口类
     - 快慢类
 
-
-
-
-
-
-
+* 常见题型：
+    - 2 Sum
+    - 2 Sum ii
+    - 3 Sum
+    - 3 Sum Closest
+    - 4 Sum
+    - k Sum
+    - Triangle Count
+    - Trapping Rain Water
+    - Container With Most Water
 
 ### 排序
 
