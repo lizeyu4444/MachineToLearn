@@ -3,6 +3,19 @@
 
 ## 解题模版
 
+### 小的Tip
+
+* 规律1：见到需要维护一个集合的最小值/最大值的时候就要想到堆，例如第k小/大，可以是多个数组、也可以是矩阵
+    - kth Smallest In m\*n Matrix: each column and row is sorted
+    - kth Smallest In 3 Arrays: each array is unsorted
+    - kth Smallest Sum In Two Sorted Arrays
+    - Trapping Rain Water 2
+
+* 规律2：见到数组要先想到排序
+
+
+
+
 ### 二分法
 
 * **说明**：
@@ -98,12 +111,12 @@ void BFS(int v) {
 ### DFS
 
 * **说明**：
-    1. 使用递归，非显示的使用栈，可以看出时复杂版的递归
-    2. 有的时候不一定需要判断是否访问过，即visited[v]不是必需，就看是否重复访问当前节点
-    3. 使用此种方式图一般使用临接表表示
+    - 使用递归，非显示的使用栈，可以看出时复杂版的递归
+    - 有的时候不一定需要判断是否访问过，即visited[v]不是必需，就看是否重复访问当前节点
+    - 使用此种方式图一般使用临接表表示
 * **使用**：
-    1. 一般寻找合适的路径、组合方式都适用图搜索
-    2. 隐式图：有的时候不一定是显示节点，比如棋盘、密码锁等，需要找出状态节点
+    - 一般寻找合适的路径、组合方式都适用图搜索
+    - 隐式图：有的时候不一定是显示节点，比如棋盘、密码锁等，需要找出状态节点
 
 
 * **DFS模版**：
@@ -121,9 +134,9 @@ void DFS(int v) {
 ### 递归
 
 * **使用**：
-    1. 能够将问题拆分成非重叠子问题，可以使用二分法
-    2. 满足边界条件返回，最后合并返回结果
-    3. 当返回是所有的结果时，可以让函数返回为空，并在判断边界条件时收集符合条件的结果
+    - 能够将问题拆分成非重叠子问题，可以使用二分法
+    - 满足边界条件返回，最后合并返回结果
+    - 当返回是所有的结果时，可以让函数返回为空，并在判断边界条件时收集符合条件的结果
 
 * **常见题型**：
 
@@ -142,24 +155,96 @@ int recursive(int x, int y) {
 
 ### 双指针
 
-* **对撞型指针**
+* **对撞型指针**：一个数组，从两边往中间移动
     - Two sum类
     - Partition类
 
-* **前向型指针**
+Two Sum类:
+```
+if (array[i] + array[j] > target) {
+    // do somthing;
+    j--;
+} else if (array[i] + array[j] < target) {
+    // do something;
+    i++;
+} else {
+    // do something;
+    i++/j--;
+}
+```
+
+Partition类：
+```
+int partition(int[] nums, int left, int right) {
+    int pivot = nums[left];
+
+    while (left < right) {
+        while (left < right && nums[right] >= pivot) {
+            right--;
+        }
+        nums[left] = nums[right];
+
+        while (left < right && nums[left] <= pivot) {
+            left++;
+        }
+        nums[right] == num[left];
+    }
+
+    // 返还pivot点到数组里面
+    nums[left] = pivot;
+    return left;
+}
+
+```
+
+* **前向型指针**：一个数组，同时向前移动
     - 窗口类
     - 快慢类
 
+窗口类，不同于滑动窗口
+```
+for (int i=0; i < n; i++) {
+    while (int j < n) {
+        if (condition) {
+            j++;
+            // 更新j的状态;
+        } else {
+            break;
+        }
+    }
+    // 更新i状态
+}
+
+```
+
+* **两个数组**：并行
+
+两个数组分别使用一个指针，各找一个元素
+
 * 常见题型：
     - 2 Sum
-    - 2 Sum ii
+    - 2 Sum II
     - 3 Sum
     - 3 Sum Closest
     - 4 Sum
     - k Sum
-    - Triangle Count
-    - Trapping Rain Water
-    - Container With Most Water
+    - Triangle Count：2 Sum类
+    - Trapping Rain Water：2 Sum类
+    - Container With Most Water：2 Sum类(待完成)
+    - Sort colors：Partition类
+    - Partition Array by Odd and Even：Partition类
+    - kth Largest Element：Partition类
+    - Valid Palindrome：Partition类
+    - Sort Letters by Case：Partition类
+    - Quict Sort/ Quick Select/ Nuts Bolts Problem/Wiggle Sort II：Partition类
+    - Minimun Size Subarray Sum：窗口类
+    - Longeset Substring Without Repeating Characters：窗口类
+    - Longeset Substring wiht at Most k(two) Distinct Characters：窗口类
+    - Mininmun Window Substring：窗口类
+    - Find the Middle of Linked List：快慢类
+    - Linked List Cycle I, II：快慢类
+    - The Smallest Difference：并行类
+    - Merge Two Sorted Lists：并行类
 
 ### 排序
 
