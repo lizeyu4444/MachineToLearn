@@ -9,7 +9,7 @@
     - kth Smallest In m\*n Matrix: each column and row is sorted
     - kth Smallest In 3 Arrays: each array is unsorted
     - kth Smallest Sum In Two Sorted Arrays
-    - Trapping Rain Water 2
+    - Trapping Rain Water II
 
 * 规律2：见到数组要先想到排序
 
@@ -62,10 +62,10 @@ void BS(vector<int> nums) {
     - 经常使用prev和cur两个节点来共同操作链表
     - 链表最大的特点是灵活，不用耗费额外空间，所以很多方法都可以达到空间复杂度要求
 * **使用**：
-    - 链表的插入、删除要熟悉
-    - 经常使用的技巧是快慢指针
+    - 链表的插入、删除
+    - 经常使用的技巧是[快慢指针](#双指针)
 * **常见题型**：
-    - merge k linked list，三种方法都要会（优先级队列、分治、两两合并）
+    - Merge k Linked List，三种方法都要会（优先级队列、分治、两两合并）
 
 * **模版**：
 ```
@@ -133,14 +133,14 @@ void DFS(int v) {
 
 ### 递归
 
-* **使用**：
-    - 能够将问题拆分成非重叠子问题，可以使用二分法
+* **说明**：
+    - 可以看出，递归跟DFS很像，算是DFS的一种解法
+    - 能够将问题拆分成非重叠子问题，便可以使用递归
     - 满足边界条件返回，最后合并返回结果
     - 当返回是所有的结果时，可以让函数返回为空，并在判断边界条件时收集符合条件的结果
 
 * **常见题型**：
-
-例如Leetcode78求subsets
+    - subsets I/II
 
 * **模版**：
 ```
