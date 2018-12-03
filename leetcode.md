@@ -84,13 +84,13 @@ void LinkedList(node* head) {
 ### 数组和数字
 
 * **常见题型**：
-    - 排序数组
-      融合两个排序数组、排序数组的交集、两个数组的点积
-      两个有序数组的中点
-    - 子数组
-      购买股票
-      子数组subarray
-    - [双指针](#双指针)
+    - Sorted Array
+      Merge Two Sorted Arrays, Insersection of Two Array, Multiply Two Arrays
+      Median of Two Sorted Arrays
+    - Subarray
+      Best Time to Buy and Sell Stocks I, II, III
+      Subarray I, II, III, IV
+    - [Two Pointers](#双指针)
 
 ### BFS和DFS
 
