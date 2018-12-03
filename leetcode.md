@@ -583,7 +583,76 @@ public static void postorderTraversal(TreeNode root) {
 }
 ```
 
-### dynamic programming
+### Dynamic Programming
+
+动归要素：
+* 最优子结构：问题的最优解所包含的子问题的解也是最优的，例如A->B->C是最优线路，A->B和B->C分别也是最优的
+* 重叠子问题：子问题重复计算，是使用动归来减少计算步骤的重要因素，否则跟递归没什么区别
+* 无后效性：未来的状态只与当前状态有关，即过去的不影响未来
+
+做题关键：
+* 定义状态
+* 写出状态转移方程
+* 初始化条件和编程
+
+分类：
+* 表格法和记忆法
+* 递推和递归
+* From up to bottom and from up to bottom
+
+常见问题分类：
+* 多阶段决策
+* 线性结构：字符串、整数序列、多边形等
+* 数
+* DAG: 最长路径、最短路径、路径计数等
+* 复杂结构
+
+
+最大利润:
+```
+sum[i] = max(sum[i-1)]+a[i]-a[i-1], 0), state[i] = max(state[i-1], sum[i])
+```
+
+最大子序和(Max sum):
+```
+SumV[i] = max(SumV[i-1]+a[i], a[i]), state[i] = max(SumV[i], state[i-1])
+```
+
+最长递增子序列(LIS，不连续)：
+```
+state[i]=max(state[j], state[i]) if a[i]>a[j], for all j<i, O(n^2)
+// 转化为LCS，先排序得到另一个序列b，求a和b的最长递增子序列，O(nlgn+n^2)
+DP+二分搜索：O(nlgn)，维护一个当前最优的递增序列——找到恰好大于它更新
+```
+
+最长递增子串(LIS的特殊情况要求连续)：
+```
+state[i]=state[i-1]+1 if a[i]>a[i-1] else state[i]=1
+```
+
+最长公共子序列(LCS，不连续):
+```
+state[i, j]=state[i-1, j-1]+1 if a[i]=a[j] else state[i, j]=max(state[i-1, j], state[i, j-1])
+// 复杂度：O(n^2)
+```
+
+最长公共子串(LCS的特殊情况要求连续):
+```
+state[i, j]=state[i-1, j-1]+1 if a[i]=a[j] else state[i, j]=0
+```
+
+最长回文子串：
+```
+state[j, i] =1 if i=j;  =(a[i]==a[j]) if i-j=1;  =(a[i]==a[j])&&state[j+1, i-1]，O(n^2)
+// 从j到i是回文子串那么j+1到i-1也是回文子串
+```
+
+二维矩阵中最大正方形面积：
+```
+state[i, j] = min(state[i-1, j-1], state[i-1][j], state[i, j-1])) + 1 if a[i, j]=1 else =0
+// 使用state[i, j]表示以点a[i, j]为正方形的最大边长，再用一个变量记录最长边
+// O(n^2)
+```
 
 * **minimal total in triangle**
 ```
