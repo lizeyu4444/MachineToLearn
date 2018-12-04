@@ -85,11 +85,11 @@ void LinkedList(node* head) {
 
 * **常见题型**：
     - Sorted Array
-      Merge Two Sorted Arrays, Insersection of Two Array, Multiply Two Arrays
-      Median of Two Sorted Arrays
+        Merge Two Sorted Arrays, Insersection of Two Array, Multiply Two Arrays
+        Median of Two Sorted Arrays
     - Subarray
-      Best Time to Buy and Sell Stocks I, II, III
-      Subarray I, II, III, IV
+        Best Time to Buy and Sell Stocks I, II, III
+        Subarray I, II, III, IV
     - [Two Pointers](#双指针)
 
 ### BFS和DFS
