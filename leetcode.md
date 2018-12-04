@@ -83,6 +83,11 @@ void LinkedList(node* head) {
 
 ### 数组和数字
 
+* **做题要点**：
+    - 排序数组：一般复杂度要求比较高，需要二分法。因而第一步要看数组是否排序，没有先排序
+    - 子数组：该类题常用动态规划来解，另需要掌握一个转化技巧，m到n个数 = 前n个数 - 前m个数
+    - 双指针：熟悉基本题型就可以
+
 * **常见题型**：
     - Sorted Array
         1. Merge Two Sorted Arrays, Insersection of Two Array, Multiply Two Arrays
@@ -142,7 +147,7 @@ void DFS(int v) {
     - 当返回是所有的结果时，可以让函数返回为空，并在判断边界条件时收集符合条件的结果
 
 * **常见题型**：
-    - subsets I/II
+    - subsets I, II
 
 * **模版**：
 ```
