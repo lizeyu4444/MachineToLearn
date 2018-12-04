@@ -88,10 +88,10 @@ void LinkedList(node* head) {
         1. Merge Two Sorted Arrays, Insersection of Two Array, Multiply Two Arrays
         2. Median of Two Sorted Arrays
     - Subarray
-        3. Best Time to Buy and Sell Stocks I, II, III
-        4. Subarray I, II, III, IV
-        5. Maximum Subarray I, II
-        6. Subarray Sum I, II, Closest
+        1. Best Time to Buy and Sell Stocks I, II, III
+        2. Subarray I, II, III, IV
+        3. Maximum Subarray I, II
+        4. Subarray Sum I, II, Closest
     - [Two Pointers](#双指针)
 
 ### BFS和DFS
