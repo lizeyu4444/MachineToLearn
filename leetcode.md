@@ -128,13 +128,16 @@ void BFS(int v) {
 
 * **DFS模版**：
 ```
-void DFS(int v) {
-    if (边界条件)
+# expression1通常是终止条件，expression2是剪枝条件
+void dfs() {
+    if (expression1)
+        //do somethin
         return;
-    visited[v] = true;
-    for (v的每一个邻接点w) 
-        if (!visited[w])
-            DFS(w)
+
+    for (int i=0; i<N; i++) 
+        if (expression2)
+            //do somthing
+        dfs()
 }
 ```
 

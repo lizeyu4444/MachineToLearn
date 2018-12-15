@@ -132,6 +132,72 @@ Blackburn I-PER
 
 
 
+## System Design
+
+Main steps:
+
+1. Understand the problem and scope
+* Define the main scenarios, with the help of the interviewer.
+* Sort them and remove items that seems not important here.
+* Make sure of high performance, simplicity, scalability and robustness.
+
+2. Think about constraints
+* Make clear about some key indicators, like daily active users, average online time, requests per second. Some may be offered, some should be calculated. 
+	- **Users**: average_concurrent_users = daily_active_users / daily_seconds * average_online_time. peak_users = average_concurrent_users * 6.
+	- **Traffic**: given traffic of each item as `t`, such as user, movie or tweet, then max_peak_traffic = `t` * peak_users.
+	- **Memory**: given memory of each item as `m`, such as user, then max_memory = `m` * daily_active_users.
+	- **Storage**: given storage of each item as `s`, such as movie or tweet, then total_storage = `s` * average_movie_size. 
+* Estimate reads vs. writes percentage, how much data written or read per second?
+* Total storage required over 5 years.
+
+3. Abstract design
+* Layers (service, function, data, caching).
+* Rough overview of any key algorithm that drives the service.
+* Consider bottlenecks and determine solutions.
+
+In the following projects, I will show how to solve them to using the flow.
+
+
+### Design a Cache System
+
+Cache system is a widely adopted technique in almost every applications today. For instance, at network area cache is used in DNS lookup and in web server cache is used for frequent requests.
+
+**LRU**:
+
+One of the most common cache systems is LRU. If A exists in the cache, just return the value. If A does not exist and it has extra storage slots, return none and insert A in the cache. If the cache is full, pop out the least recently used item and push A into it.
+
+Main operations: lookup, insert and delete. A double-linked list is adopted to save the elements, and a hash table comes with a resource identifier as key and the address of the linked list node as value.
+
+**Eviction policy**:
+
+When the cache is full, we need to remove the existing items from the cache. LRU is just one method to pop out the least recently used item. But there are other choices.
+
+* Random Replacement: randomly delete an entry.
+* Least frequently used: remove items which are not least used. The frequency of each item must be recorded.
+* W-TinyLFU: the problem of LFU is that some items may only be used frequently in the past and will still remain in the cache. It would be a waste of storage resources. It solves this problem by calculating frequency with a time window.
+
+**Concurrency**:
+
+It falls into a reader-writer problem. When multiple clients are updating at the same time, there can be race condition. We can use **lock** the limit the writing order. But it affects the performance a lot.
+
+It is not necessary to update values immediately. We can store all the updates into logs and use another process in the backend to execute the logs asynchronously.
+
+**Distributed cache**:
+
+The object is going to scale the key-value storage into multiple machines. The question is how to split the data into multiple folds. **Sharding** is to split data and save each fold according to some rule. For instance, if all keys are string, they can be divided by the first char. This has a problem that storage on each machine may not be balanced. Using hashing of key is also one solution and do mod calculation.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
