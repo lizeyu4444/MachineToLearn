@@ -137,11 +137,13 @@ Blackburn I-PER
 Main steps:
 
 1. Understand the problem and scope
+
 * Define the main scenarios, with the help of the interviewer.
 * Sort them and remove items that seems not important here.
 * Make sure of high performance, simplicity, scalability and robustness.
 
 2. Think about constraints
+
 * Make clear about some key indicators, like daily active users, average online time, requests per second. Some may be offered, some should be calculated. 
 	- **Users**: average_concurrent_users = daily_active_users / daily_seconds * average_online_time. peak_users = average_concurrent_users * 6.
 	- **Traffic**: given traffic of each item as `t`, such as user, movie or tweet, then max_peak_traffic = `t` * peak_users.
@@ -151,6 +153,7 @@ Main steps:
 * Total storage required over 5 years.
 
 3. Abstract design
+
 * Layers (service, function, data, caching).
 * Rough overview of any key algorithm that drives the service.
 * Consider bottlenecks and determine solutions.
@@ -184,7 +187,7 @@ It is not necessary to update values immediately. We can store all the updates i
 
 **Distributed cache**:
 
-The object is going to scale the key-value storage into multiple machines. The question is how to split the data into multiple folds. **Sharding** is to split data and save each fold according to some rule. For instance, if all keys are string, they can be divided by the first char. This has a problem that storage on each machine may not be balanced. Using hashing of key is also one solution and do mod calculation.
+The object is going to scale the key-value storage into multiple machines. The question is how to split the data into multiple folds. **Sharding** is a horizontal partition of data according to some rule. Each shard is held on a separate instance. For instance, if all keys are string, they can be divided by the first char. This has a problem that storage on each machine may not be balanced. Using hashing of key is also one solution and do mod calculation.
 
 
 
