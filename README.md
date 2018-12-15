@@ -136,13 +136,13 @@ Blackburn I-PER
 
 Main steps:
 
-1. Understand the problem and scope
+**Understand the problem and scope**
 
 * Define the main scenarios, with the help of the interviewer.
 * Sort them and remove items that seems not important here.
 * Make sure of high performance, simplicity, scalability and robustness.
 
-2. Think about constraints
+**Think about constraints**
 
 * Make clear about some key indicators, like daily active users, average online time, requests per second. Some may be offered, some should be calculated. 
 	- **Users**: average_concurrent_users = daily_active_users / daily_seconds * average_online_time. peak_users = average_concurrent_users * 6.
@@ -152,18 +152,24 @@ Main steps:
 * Estimate reads vs. writes percentage, how much data written or read per second?
 * Total storage required over 5 years.
 
-3. Abstract design
+**Abstract design**
 
 * Layers (service, function, data, caching).
 * Rough overview of any key algorithm that drives the service.
 * Consider bottlenecks and determine solutions.
 
-In the following projects, I will show how to solve them to using the flow.
+In the following projects, I will show how to solve them using the flow. **Designing a recommendation engine or advertising system may be a slightly different from those designing a website or cache system, because the former needs to be considered under different scenarios**.
 
 
 ### Design a Cache System
 
-Cache system is a widely adopted technique in almost every applications today. For instance, at network area cache is used in DNS lookup and in web server cache is used for frequent requests.
+Cache system is a widely adopted technique in almost every applications today. For instance, at network area cache is used in DNS lookup and in web server cache is used for frequent requests. It also applies to design a key-value system.
+
+**Think about constraints**
+
+* Lookup O(1).
+* Insert O(1).
+* delete O(1).
 
 **LRU**:
 
@@ -190,10 +196,58 @@ It is not necessary to update values immediately. We can store all the updates i
 The object is going to scale the key-value storage into multiple machines. The question is how to split the data into multiple folds. **Sharding** is a horizontal partition of data according to some rule. Each shard is held on a separate instance. For instance, if all keys are string, they can be divided by the first char. This has a problem that storage on each machine may not be balanced. Using hashing of key is also one solution and do mod calculation.
 
 
+### Design Youtube
+
+It is too broad to have no idea where to start. It's better to start with a **high-level** overview of the design before digging into all the details. Remember the flow and the first step is to figure out what kind of scenarios should have. 
+
+**Scenarios**
+
+Some conditions must be fufilled with high performance, such as video quality and speed.
+
+* User and register system.
+* Video/images search and serve.
+* Video recommendation.
+
+**Constraints**
+
+todo.
+
+**Abstract design**
+
+* Storage: depending on the constraints, choose proper database to store videos and users. Design the database schema.
+	- User: use **relation database** like MySQL and design the data schema. There are two tables, one of which stores authentication info, like email and password, the other profile information like address, age and so forth.
+	- Video meta info: a video contains a lot of infos including meta data (title, author, size), video likes and view etc.. So the meta info should be kept in another table. The author-video relation will be another table to map user id to video id. The user-like-video can also be a separate table
+	- Video: the videos themselves could be saved in disk as files. One common approach is to use CDN. In short, CDN is a globally distributed network of proxy servers in multiple data centers. It makes video resources closer to users and assure fast transport speed. The videos are huge so popular videos are stored in CDN while the long-tailed are served in their own servers.
+
+* Scalability: scale the storage and system if there are billions of users. 
+* Web server: the common structure is front end and backend split. The front end handles logics like user authentication, sessions, fetching or update users' data, while the backend handles the video storage and search, recommendation server and so forth.
+* Cache: need cache in multiple layers like web server, video serving, etc..
+* Other modules: recommendation engine, security system and so on. 
 
 
+### Design a Recommendatation Engine
 
+It tries to explore potential items the users may like and improve the experience and revenue. Here only talks about that of youtube.
 
+**Constraints**
+
+There may not be strict constraints here, because it does not need to recommend instantly once the user viewed. The quality is hard to quantify and measure, usually AB test. It is suggested to define the constraints with the interviews.
+
+The main constraint may be the requests per second. If we have 1 million users per second and the playlists are renewed every 30 minutes. So the requests per second of RE is `10^6*6/30/60=3000`
+
+**Heuristic solution**
+
+Althought machine learning or deep learning is sweeping everywhere including NLP, CV, RE. But it can be possible to build a good system based on simple techniques. For instance, only based on user's view history it can recommend similar videos with same tags or category. The popularity is also a good indicator to suggest.
+
+**Major steps**
+
+* Figure out the field of RE, music or video, e-commence or news.
+* Check the data available and dig into them.
+* Choose proper algorithm: heuristic solution, collaborative filtering or machine leraning based.
+* Data process and feature engineering.
+* Train the model and evaluate offline.
+* Deploy model, do AB test and collect feedbacks.
+* Infrastructure. 
 
 
 
