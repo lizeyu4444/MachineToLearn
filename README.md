@@ -154,9 +154,9 @@ Main steps:
 
 **Abstract design**
 
-* Layers (service, function, data, caching).
+* Layers (service, function, memory, database, caching).
 * Rough overview of any key algorithm that drives the service.
-* Consider bottlenecks and determine solutions.
+* Scalability is also considered as a design when there are bottlenecks and constraints, leading to the optimization of each layer.
 
 In the following projects, I will show how to solve them using the flow. **Designing a recommendation engine or advertising system may be a slightly different from those designing a website or cache system, because the former needs to be considered under different scenarios**.
 
@@ -216,7 +216,7 @@ todo.
 
 * Storage: depending on the constraints, choose proper database to store videos and users. Design the database schema.
 	- User: use **relation database** like MySQL and design the data schema. There are two tables, one of which stores authentication info, like email and password, the other profile information like address, age and so forth.
-	- Video meta info: a video contains a lot of infos including meta data (title, author, size), video likes and view etc.. So the meta info should be kept in another table. The author-video relation will be another table to map user id to video id. The user-like-video can also be a separate table
+	- Video meta info: a video contains a lot of infos including meta data (title, author, size), video likes and view etc.. So the meta info should be kept in another table. The author-video relation will be another table to map user id to video id. The user-like-video can also be a separate table.
 	- Video: the videos themselves could be saved in disk as files. One common approach is to use CDN. In short, CDN is a globally distributed network of proxy servers in multiple data centers. It makes video resources closer to users and assure fast transport speed. The videos are huge so popular videos are stored in CDN while the long-tailed are served in their own servers.
 
 * Scalability: scale the storage and system if there are billions of users. 
@@ -235,10 +235,6 @@ There may not be strict constraints here, because it does not need to recommend 
 
 The main constraint may be the requests per second. If we have 1 million users per second and the playlists are renewed every 30 minutes. So the requests per second of RE is `10^6*6/30/60=3000`
 
-**Heuristic solution**
-
-Althought machine learning or deep learning is sweeping everywhere including NLP, CV, RE. But it can be possible to build a good system based on simple techniques. For instance, only based on user's view history it can recommend similar videos with same tags or category. The popularity is also a good indicator to suggest.
-
 **Major steps**
 
 * Figure out the field of RE, music or video, e-commence or news.
@@ -248,6 +244,68 @@ Althought machine learning or deep learning is sweeping everywhere including NLP
 * Train the model and evaluate offline.
 * Deploy model, do AB test and collect feedbacks.
 * Infrastructure. 
+
+**Heuristic solution**
+
+Althought machine learning or deep learning is sweeping everywhere including NLP, CV, RE. But it can be possible to build a good system based on simple techniques. For instance, only based on user's view history it can recommend similar videos with same tags or category. The popularity is also a good indicator to suggest.
+
+**Collaborative filtering**
+
+There are many materials online so it is not going to talk details here.
+
+Must know the principals of item-based and user-based methods and their scenarios and characteristcs. And matrix factorization is commonly used in CF.
+
+**Feature engineering**
+
+There are two types of features, explicit and implicit. Explicit features can be ratings, favorites etc., while implicit features can be clicked.
+
+Back to the Youtube problem, there are several features quite obvious.
+* Like/share/subscribe
+* Watch time
+* Video title/labels/categories
+* Freshness
+
+**Abstract design**
+
+* Computation: Spark/MapReduce.
+* Storage: HDFS/Hive.
+
+
+### Design Instagram
+
+More specifically, desigin a system which allows people to follow each other, share/comment/like pictures.
+
+**Scenario**
+
+* User log/register and follow each other.
+* Photo share/comment/like.
+* Explore new photos.
+* Photo processing, like face beautifying.
+
+**Constraints**
+
+todo.
+
+**Abstract design**
+
+* Storage: having these models, it's easily to check a user's feed and status list.
+	- User: use relational database like MySQL. Hence a table is used to store id, name, registration date and so on.
+	- Picture: the same for the picture.
+	- Other model: user-follow relation and user-picture relation. User-follow relation is single direction.
+
+* Feed ranking
+	- Rank by chronological order.
+	- Rank by how likely the user will like this picture. A common strategy is to take various features and compute a final score for each picture. Features may come from like/comment numbers that the user has liked other users' pictures.
+	- Collaborative filtering is another method.
+
+* Image optimization
+	- Images are static and seldomly get updated. Amazon S3.
+	- Images can be compressed to save space and improve transport speed. Hence only compressed images are served.
+	
+* Scalability
+	- Response time: it refers to a user when he refreshes his feed. It is time consuming when a user follows a huge number of people. The server has to go over everyone the user follows, fetch all the picture from them, and rank them based on particular algorithm. 1. Rank by **date**. Just fetch the top N most recent picutres from each person and rank. 2. Rank by **features**. Precompute some signals offline beforehand. The most time consumed is **fetching a person's pictures and ranking**, which mostly needs optimization.
+	- Architecture: every layer is a service which splits the whole system. For example, we can have many database servers apart from web servers, which can be scaled easily if one part is bottlenecked.
+	- Database: even if a database is in a separate server, it will not be able to store an infinite number of data. Vertical splitting (**partitioning**) is splitting user database into sub-databases like user database and registration database. Horizontal splitting (**sharding**) is splitting databases based on some column, name by the first char, location by country, etc.
 
 
 
